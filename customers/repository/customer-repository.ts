@@ -23,4 +23,23 @@ export class CustomerRepository {
 			throw new Error(error as string)
 		}
 	}
+
+	async update(options: { name: string, order_id: string }, values: { name: string }): Promise<void> {
+		try {
+			console.log(values.name)
+			const queryText = `UPDATE customers SET name = $1 WHERE name = $2 AND order_id = $3`;
+			await (await db).query(queryText, [values.name, options.name, options.order_id]);
+		} catch (error) {
+			throw new Error(error as string)
+		}
+	}
+
+	async delete(options: { name: string, order_id: string }): Promise<void> {
+		try {
+			const queryText = `DELETE FROM customers WHERE name = $1 AND order_id = $2`;
+			await (await db).query(queryText, [options.name, options.order_id]);
+		} catch (error) {
+			throw new Error(error as string)
+		}
+	}
 }

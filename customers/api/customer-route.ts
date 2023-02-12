@@ -20,4 +20,14 @@ router.route('/')
 		res.status(201).send();
 	}));
 
+router.route('/:name')
+	.put(catchAsyncErrors(async (req: Request<{ name: string }, unknown, { order_id: string, name: string }>, res: Response, next: NextFunction) => {
+		await customerController.updateCustomer({ name: req.params.name, order_id: req.body.order_id }, { name: req.body.name });
+		res.status(200).send();
+	}))
+	.delete(catchAsyncErrors(async (req: Request<{ name: string }, unknown, { order_id: string }>, res: Response, next: NextFunction) => {
+		await customerController.deleteCustomer({ name: req.params.name, order_id: req.body.order_id });
+		res.status(200).send();
+	}));
+
 export default router;

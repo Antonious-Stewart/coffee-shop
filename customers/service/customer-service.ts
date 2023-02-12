@@ -26,4 +26,20 @@ export class CustomerService {
 			throw new Error(error as string)
 		}
 	}
+
+	async update(options: { name: string, order_id: string }, values: { name: string }): Promise<void> {
+		try {
+			await this.customerRepository.update(options, values);
+		} catch (error) {
+			throw new Error(error as string)
+		}
+	}
+
+	async delete(options: { name: string, order_id: string }): Promise<void> {
+		try {
+			await this.customerRepository.delete(options);
+		} catch (error) {
+			throw new Error(error as string)
+		}
+	}
 }

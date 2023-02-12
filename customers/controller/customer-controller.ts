@@ -22,4 +22,23 @@ export class CustomerController {
 			throw new Error(error as string);
 		}
 	}
+
+	async updateCustomer(options: { name: string, order_id: string }, values: { name: string }): Promise<void> {
+		try {
+			console.log(options.name)
+			await this.customerService.update(options, values);
+		} catch (error) {
+			console.error(error);
+			throw new Error(error as string);
+		}
+	}
+
+	async deleteCustomer(options: { name: string, order_id: string }): Promise<void> {
+		try {
+			await this.customerService.delete(options);
+		} catch (error) {
+			console.error(error);
+			throw new Error(error as string);
+		}
+	}
 }
